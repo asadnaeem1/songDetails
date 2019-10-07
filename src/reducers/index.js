@@ -1,6 +1,6 @@
-import { selectSong } from "../actions";
+import {combineReducers} from 'redux';
 
-export const songsReducer = () => {
+const songsReducer = () => {
     return [
         { title: 'Truth Hurts', duration: '4:45'},
         { title: 'Senorita', duration: '2:30'},
@@ -9,9 +9,14 @@ export const songsReducer = () => {
     ]
 }
 
-export const selectSongReducer = (selectedSong=null, action) => {
+const selectedSongReducer = (selectedSong=null, action) => {
     if(action.type==='SONG_SELECTED'){
         return action.payload;
     }
-    return selectSong;
+    return selectedSong;
 }
+
+export default combineReducers({
+    songs: songsReducer,
+    selectedSong: selectedSongReducer
+})
